@@ -6,7 +6,9 @@
     @mouseleave="isHovered = false"
   >
     <div class="container mx-auto flex justify-between items-center">
-      <RouterLink to="/" class="text-2xl font-bold text-white">4NIS</RouterLink>
+      <RouterLink to="/" class="text-2xl font-bold text-white hover:text-red-500 transition">
+        4NIS
+      </RouterLink>
 
       <!-- Hamburger Button -->
       <button @click="isOpen = !isOpen" class="text-white focus:outline-none">
@@ -24,19 +26,25 @@
         <XMarkIcon class="w-8 h-8" />
       </button>
       <ul class="mt-16 space-y-4 text-lg text-white text-center">
-        <li>
-          <RouterLink to="/" class="block py-2">Home</RouterLink>
+        <li class="group">
+          <RouterLink to="/" class="block py-2 transition transform group-hover:scale-105 hover:text-red-500">
+            Home
+          </RouterLink>
         </li>
-        <li>
-          <RouterLink to="/Posts" class="block py-2">Posts</RouterLink>
+        <li class="group">
+          <RouterLink to="/Posts" class="block py-2 transition transform group-hover:scale-105 hover:text-red-500">
+            Posts
+          </RouterLink>
         </li>
-        <li>
-          <RouterLink :to="{ name: 'PostView', params: { id: 1 } }" class="block py-2">
+        <li class="group">
+          <RouterLink :to="{ name: 'PostView', params: { id: 1 } }" class="block py-2 transition transform group-hover:scale-105 hover:text-red-500">
             Post
           </RouterLink>
         </li>
-        <li>
-          <RouterLink to="/CreatePost" class="block py-2">Create Post</RouterLink>
+        <li class="group">
+          <RouterLink to="/CreatePost" class="block py-2 transition transform group-hover:scale-105 hover:text-red-500">
+            Create Post
+          </RouterLink>
         </li>
       </ul>
     </div>

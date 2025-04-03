@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import PopUp from "@/components/PopUp.vue";
 
-// Reactive variables for form inputs
 const title = ref("");
 const body = ref("");
 const isSubmitting = ref(false);
@@ -15,7 +15,7 @@ const createPost = async () => {
   }
 
   isSubmitting.value = true;
-  message.value = "";
+  message.value = ""; // Reset message before submission
 
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -23,22 +23,24 @@ const createPost = async () => {
       body: JSON.stringify({
         title: title.value,
         body: body.value,
-        userId: 1, // Hardcoded user ID for now
+        userId: 1, // Hardcoded user ID
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
 
+    if (!response.ok) throw new Error("Failed to create post");
+
     const data = await response.json();
     console.log("Created Post:", data);
 
-    message.value = "Post created successfully!";
+    message.value = "✅ Post created successfully!";
     title.value = "";
     body.value = "";
   } catch (error) {
     console.error("Error creating post:", error);
-    message.value = "Failed to create post. Try again!";
+    message.value = "❌ Failed to create post. Try again!";
   } finally {
     isSubmitting.value = false;
   }
@@ -48,6 +50,9 @@ const createPost = async () => {
 <template>
   <div class="min-h-screen bg-gray-900 text-white flex flex-col items-center p-5">
     <h1 class="text-3xl font-bold mt-10">Create a New Post</h1>
+
+    <!-- Popup Component -->
+    <PopUp :message="message" />
 
     <form @submit.prevent="createPost" class="w-full max-w-lg mt-5 bg-gray-800 p-6 rounded-lg shadow-lg">
       <label class="block text-gray-300">Title:</label>
@@ -72,8 +77,6 @@ const createPost = async () => {
       >
         {{ isSubmitting ? "Submitting..." : "Create Post" }}
       </button>
-
-      <p v-if="message" class="mt-3 text-green-400">{{ message }}</p>
     </form>
   </div>
 </template>

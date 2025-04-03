@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-900 text-white flex flex-col items-center">
+  <div class="min-h-screen bg-cover bg-center text-white flex flex-col items-center home-bg">
     <!-- Moving Header -->
     <div class="overflow-hidden w-full bg-blue-500 py-3">
       <div class="flex whitespace-nowrap animate-marquee">
@@ -15,7 +15,7 @@
     <!-- Hero Section with Fade-in Animation -->
     <section class="text-center mt-10 p-5 animate-fade-in">
       <h2 class="text-4xl font-bold text-white">Explore the Latest Articles</h2>
-      <p class="mt-4 text-gray-300">
+      <p class="mt-4 text-black">
         Get insights, trends, and updates on the best products in the market.
       </p>
     </section>
@@ -25,7 +25,7 @@
       <div
         v-for="(post, index) in posts"
         :key="index"
-        class="bg-gray-800 shadow-lg p-5 rounded-lg transform transition duration-300 hover:scale-105 hover:bg-gray-700"
+        class="bg-gray-800/70 backdrop-blur-sm shadow-lg p-5 rounded-lg transform transition duration-300 hover:scale-105 hover:bg-gray-700/70"
       >
         <h3 class="text-xl font-semibold text-white">{{ post.title }}</h3>
         <p class="text-gray-400 mt-2 line-clamp-2">{{ post.excerpt }}</p>
@@ -53,6 +53,14 @@ const posts = ref([
 </script>
 
 <style scoped>
+/* Background Image */
+.home-bg {
+  background-image: url("/bbl.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 /* Moving Text Animation */
 @keyframes marquee {
   0% {
