@@ -1,46 +1,32 @@
 <template>
-  <!-- Sidebar for desktop, top nav for mobile -->
-  <nav>
-    <!-- Desktop Sidebar -->
-    <aside
-      class="hidden md:fixed md:flex md:flex-col md:justify-between md:items-center md:top-0 md:left-0 md:h-screen md:w-56 bg-gray-900/90 shadow-2xl z-50 p-6 animate-fade-in-left"
-    >
-      <div class="flex flex-col items-center w-full">
-        <RouterLink to="/" class="logo-4nis text-3xl font-extrabold mb-10 transition-transform duration-300 hover:scale-110 animate-logo-bounce bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent">
-          4NIS
+  <nav class="fixed w-full top-0 left-0 z-50 bg-gray-900/90 shadow-lg p-4 flex items-center justify-between animate-fade-in-down">
+    <!-- Logo -->
+    <RouterLink to="/" class="logo-4nis text-2xl md:text-3xl font-extrabold transition-transform duration-300 hover:scale-110 animate-logo-bounce bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      4NIS
+    </RouterLink>
+    <!-- Desktop Nav Links -->
+    <ul class="hidden md:flex space-x-8 ml-8">
+      <li>
+        <RouterLink to="/Posts" class="text-lg font-semibold text-white hover:text-red-500 transition">
+          Posts
         </RouterLink>
-        <ul class="space-y-6 w-full">
-          <!-- Home link removed -->
-          <li class="group">
-            <RouterLink to="/Posts" class="block py-2 px-4 rounded-lg text-lg font-semibold text-white hover:bg-gray-800 hover:text-red-500 transition">
-              Posts
-            </RouterLink>
-          </li>
-          <li class="group">
-            <RouterLink :to="{ name: 'PostView', params: { id: 1 } }" class="block py-2 px-4 rounded-lg text-lg font-semibold text-white hover:bg-gray-800 hover:text-red-500 transition">
-              Post
-            </RouterLink>
-          </li>
-          <li class="group">
-            <RouterLink to="/CreatePost" class="block py-2 px-4 rounded-lg text-lg font-semibold text-white hover:bg-gray-800 hover:text-red-500 transition">
-              Create Post
-            </RouterLink>
-          </li>
-        </ul>
-      </div>
-      <div class="text-gray-400 text-xs mt-10">&copy; 2024 Clearmedia</div>
-    </aside>
-
-    <!-- Top Nav for Mobile -->
-    <div class="md:hidden fixed w-full top-0 left-0 z-50 bg-gray-900/90 shadow-lg p-4 flex justify-between items-center animate-fade-in-down">
-      <RouterLink to="/" class="logo-4nis text-2xl font-bold transition-transform duration-300 hover:scale-110 animate-logo-bounce bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent">
-        4NIS
-      </RouterLink>
-      <button @click="isOpen = !isOpen" class="text-white focus:outline-none">
-        <Bars3Icon v-if="!isOpen" class="w-8 h-8" />
-        <XMarkIcon v-if="isOpen" class="w-8 h-8" />
-      </button>
-    </div>
+      </li>
+      <li>
+        <RouterLink :to="{ name: 'PostView', params: { id: 1 } }" class="text-lg font-semibold text-white hover:text-red-500 transition">
+          Post
+        </RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/CreatePost" class="text-lg font-semibold text-white hover:text-red-500 transition">
+          Create Post
+        </RouterLink>
+      </li>
+    </ul>
+    <!-- Hamburger Button for Mobile -->
+    <button @click="isOpen = !isOpen" class="md:hidden text-white focus:outline-none ml-auto">
+      <Bars3Icon v-if="!isOpen" class="w-8 h-8" />
+      <XMarkIcon v-if="isOpen" class="w-8 h-8" />
+    </button>
     <!-- Slide-in Mobile Menu -->
     <transition name="slide">
       <div
@@ -51,18 +37,17 @@
           <XMarkIcon class="w-8 h-8" />
         </button>
         <ul class="space-y-8 text-lg text-white text-center">
-          <!-- Home link removed -->
-          <li class="group">
+          <li>
             <RouterLink @click.native="isOpen = false" to="/Posts" class="block py-2 px-8 rounded-lg font-semibold hover:bg-gray-800 hover:text-red-500 transition">
               Posts
             </RouterLink>
           </li>
-          <li class="group">
+          <li>
             <RouterLink @click.native="isOpen = false" :to="{ name: 'PostView', params: { id: 1 } }" class="block py-2 px-8 rounded-lg font-semibold hover:bg-gray-800 hover:text-red-500 transition">
               Post
             </RouterLink>
           </li>
-          <li class="group">
+          <li>
             <RouterLink @click.native="isOpen = false" to="/CreatePost" class="block py-2 px-8 rounded-lg font-semibold hover:bg-gray-800 hover:text-red-500 transition">
               Create Post
             </RouterLink>
@@ -81,19 +66,6 @@ const isOpen = ref(false);
 </script>
 
 <style scoped>
-@keyframes fade-in-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-.animate-fade-in-left {
-  animation: fade-in-left 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
 @keyframes fade-in-down {
   0% {
     opacity: 0;

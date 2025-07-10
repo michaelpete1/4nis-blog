@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-purple-300 text-white flex flex-col items-center home-bg px-2 py-4">
+    <!-- Blue Divider Below Navbar -->
+    <div class="w-full h-2 bg-blue-600 fixed top-16 left-0 z-40 md:top-20"></div>
     <!-- Moving Header -->
-    <div class="overflow-hidden w-full bg-blue-500 py-3 animate-fade-in-down">
+    <div class="overflow-hidden w-full bg-blue-500 py-3 animate-fade-in-down mt-8 md:mt-12">
       <div class="flex whitespace-nowrap animate-marquee">
         <h1 class="text-white text-2xl md:text-3xl font-bold mx-4">
           Welcome to 4NIS Blog! | Stay Updated with the Latest Trends 🚀
